@@ -1,5 +1,5 @@
 ---
-title: "[MIT_6.S081] Lab: Page Table"
+title: "Working with Page Tables in xv6"
 description: Page Table Implementation
 date: 2024-02-22
 tags:

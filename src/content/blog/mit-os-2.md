@@ -1,5 +1,5 @@
 ---
-title: "[MIT_6.S081] Lab: System Calls"
+title: "Adding System Calls to xv6"
 description: System Calls Implementation
 date: 2024-02-12
 tags:

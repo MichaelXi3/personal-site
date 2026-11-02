@@ -3,7 +3,7 @@ export const site = {
   role: "Software Engineer",
   description: "Michael Xi is a software engineer building high performance storage systems.",
   intro: "I'm a software engineer working on high performance storage systems. This is where I keep my projects, photos, and notes.",
-  avatar: "/avatar.svg",
+  avatar: "/avatar.webp",
   // Set to a path such as "/resume.pdf" after adding the file to public/.
   resumePdf: null as string | null,
   nav: [

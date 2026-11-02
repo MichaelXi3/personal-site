@@ -1,5 +1,5 @@
 ---
-title: "[MIT_6.S081] Lab: Multithreading"
+title: "User-Level Threads, Locks, and Barriers"
 description: Multithreaded Programming Practices
 date: 2024-06-08
 tags:

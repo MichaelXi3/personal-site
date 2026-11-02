@@ -1,5 +1,5 @@
 ---
-title: "[MIT_6.S081] Lab: Traps"
+title: "Traps in xv6: Backtraces and Alarms"
 description: Trap Features Implementation
 date: 2024-03-12
 tags:

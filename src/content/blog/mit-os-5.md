@@ -1,5 +1,5 @@
 ---
-title: "[MIT_6.S081] Lab: Copy on Write Fork"
+title: "Implementing Copy-on-Write Fork in xv6"
 description: COW Fork of xv6
 date: 2024-04-02
 tags:
