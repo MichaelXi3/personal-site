@@ -1,0 +1,90 @@
+---
+import { render } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import { formatDate, getPosts } from "../../lib/content";
+
+export async function getStaticPaths() {
+  const posts = await getPosts();
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content, headings } = await render(post);
+const { title, description, date, updated, tags } = post.data;
+const toc = headings.filter((heading) => heading.depth <= 3);
+---
+
+<Base title={title} description={description || undefined} type="article">
+  <article>
+    <header class="page-head">
+      <h1>{title}</h1>
+      <p class="meta">
+        <time datetime={date.toISOString()}>{formatDate(date)}</time>
+        {updated && <span> · Updated {formatDate(updated)}</span>}
+      </p>
+      {
+        tags.length > 0 && (
+          <ul class="tags">
+            {tags.map((tag) => (
+              <li>{tag}</li>
+            ))}
+          </ul>
+        )
+      }
+    </header>
+    {
+      toc.length >= 4 && (
+        <details class="toc">
+          <summary>Contents</summary>
+          <ul>
+            {toc.map((heading) => (
+              <li class={`depth-${heading.depth}`}>
+                <a href={`#${heading.slug}`}>{heading.text}</a>
+              </li>
+            ))}
+          </ul>
+        </details>
+      )
+    }
+    <div class="prose"><Content /></div>
+  </article>
+  <p class="back"><a href="/blog">← All posts</a></p>
+</Base>
+
+<style>
+  .tags {
+    margin-top: 0.8rem;
+  }
+
+  .toc {
+    margin-bottom: 2rem;
+    padding: 0.7rem 1rem;
+    border: 1px solid var(--line);
+    border-radius: 0.6rem;
+    font-size: 0.93rem;
+  }
+
+  .toc summary {
+    color: var(--muted);
+    cursor: pointer;
+  }
+
+  .toc ul {
+    margin: 0.6rem 0 0.2rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  .toc li {
+    padding-block: 0.15rem;
+  }
+
+  .toc .depth-3 {
+    padding-left: 1rem;
+  }
+
+  .back {
+    margin-top: 3rem;
+    font-size: 0.93rem;
+  }
+</style>

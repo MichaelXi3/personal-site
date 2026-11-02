@@ -1,0 +1,87 @@
+---
+import Base from "../../layouts/Base.astro";
+import { getProjects } from "../../lib/content";
+
+const projects = await getProjects();
+const hasDetails = (body?: string) => Boolean(body?.trim());
+---
+
+<Base title="Projects" description="Things I've built.">
+  <header class="page-head">
+    <h1>Projects</h1>
+    <p>Things I've built.</p>
+  </header>
+
+  {projects.length === 0 && <p class="card empty">No projects yet.</p>}
+
+  <div class="grid">
+    {
+      projects.map((project) => {
+        const href = hasDetails(project.body) ? `/projects/${project.id}` : (project.data.url ?? project.data.repo);
+        return (
+          <article class="card">
+            <div class="top">
+              <h2>{href ? <a href={href}>{project.data.title}</a> : project.data.title}</h2>
+              <span class="meta">{project.data.year}</span>
+            </div>
+            <p>{project.data.summary}</p>
+            {project.data.tags.length > 0 && (
+              <ul class="tags">
+                {project.data.tags.map((tag) => (
+                  <li>{tag}</li>
+                ))}
+              </ul>
+            )}
+          </article>
+        );
+      })
+    }
+  </div>
+</Base>
+
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr));
+    gap: 0.75rem;
+  }
+
+  article {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1.15rem 1.25rem;
+  }
+
+  .top {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  h2 {
+    margin: 0;
+    font-size: 1.3rem;
+  }
+
+  h2 a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  h2 a:hover {
+    color: var(--accent);
+  }
+
+  p {
+    flex: 1;
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  .tags {
+    margin-top: 0.3rem;
+  }
+</style>

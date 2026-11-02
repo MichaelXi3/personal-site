@@ -1,0 +1,84 @@
+---
+import Base from "../../layouts/Base.astro";
+import { formatDate, getPosts } from "../../lib/content";
+
+const posts = await getPosts();
+const years = Map.groupBy(posts, (post) => post.data.date.getUTCFullYear());
+---
+
+<Base title="Blogs" description="Notes on storage, systems, and whatever else I'm learning.">
+  <header class="page-head">
+    <h1>Blogs</h1>
+    <p>Notes on storage, systems, and whatever else I'm learning.</p>
+  </header>
+
+  {posts.length === 0 && <p class="card empty">No posts yet.</p>}
+
+  {
+    [...years].map(([year, items]) => (
+      <section class="year">
+        <h2 class="eyebrow">{year}</h2>
+        <ul>
+          {items.map((post) => (
+            <li>
+              <a href={`/blog/${post.id}`}>
+                {post.data.title}
+                {post.data.draft && <span class="meta">(draft)</span>}
+              </a>
+              <time class="meta" datetime={post.data.date.toISOString()}>
+                {formatDate(post.data.date)}
+              </time>
+              {post.data.description && <p>{post.data.description}</p>}
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))
+  }
+</Base>
+
+<style>
+  .year {
+    margin-bottom: 2.5rem;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0 1rem;
+    padding-block: 0.9rem;
+    border-top: 1px solid var(--line);
+  }
+
+  li > a {
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    line-height: 1.25;
+    text-decoration: none;
+  }
+
+  li > a:hover {
+    color: var(--accent);
+  }
+
+  time {
+    grid-column: 2;
+    grid-row: 1;
+    padding-top: 0.2rem;
+    white-space: nowrap;
+  }
+
+  p {
+    grid-column: 1 / -1;
+    margin: 0.25rem 0 0;
+    color: var(--muted);
+    font-size: 0.93rem;
+  }
+</style>

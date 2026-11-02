@@ -1,0 +1,109 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  album: CollectionEntry<"photos">;
+}
+
+const { title, date, description, credit, photos } = Astro.props.album.data;
+const month = new Date(`${date}-01T00:00:00Z`).toLocaleDateString("en-US", {
+  year: "numeric",
+  month: "long",
+  timeZone: "UTC",
+});
+---
+
+<section class="album">
+  <header>
+    <h2>{title}</h2>
+    <span class="meta">{month}</span>
+    {description && <p>{description}</p>}
+    {
+      credit && (
+        <p class="credit">
+          Photos by <a href={credit.profile}>{credit.name}</a> on <a href={credit.unsplash}>Unsplash</a>
+        </p>
+      )
+    }
+  </header>
+  <div class="masonry" data-album>
+    {
+      photos.map((photo) => (
+        <a href={photo.full} data-photo data-alt={photo.alt} data-link={photo.link}>
+          <img src={photo.thumb} alt={photo.alt} width={photo.width} height={photo.height} loading="lazy" decoding="async" />
+        </a>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .album {
+    margin-bottom: 3.5rem;
+  }
+
+  header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0 1rem;
+    margin-bottom: 1rem;
+  }
+
+  h2 {
+    margin: 0;
+    font-size: 1.6rem;
+  }
+
+  p {
+    flex-basis: 100%;
+    margin: 0.3rem 0 0;
+    color: var(--muted);
+  }
+
+  .credit {
+    font-size: 0.85rem;
+  }
+
+  .credit a {
+    display: inline;
+    margin: 0;
+    border-radius: 0;
+    background: none;
+  }
+
+  .masonry {
+    column-gap: 0.6rem;
+    columns: 3;
+  }
+
+  @media (max-width: 40rem) {
+    .masonry {
+      column-gap: 0.4rem;
+      columns: 2;
+    }
+
+    a {
+      margin-bottom: 0.4rem;
+    }
+  }
+
+  a {
+    display: block;
+    margin-bottom: 0.6rem;
+    overflow: hidden;
+    border-radius: 0.4rem;
+    background: var(--tag);
+    break-inside: avoid;
+  }
+
+  img {
+    width: 100%;
+    transition: opacity 0.15s;
+  }
+
+  a:hover img {
+    opacity: 0.88;
+  }
+</style>

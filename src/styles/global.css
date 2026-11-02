@@ -1,0 +1,263 @@
+:root {
+  color-scheme: light dark;
+  --bg: light-dark(#fbfaf7, #15171a);
+  --surface: light-dark(#ffffff, #1c1f23);
+  --ink: light-dark(#1d1c19, #eceae4);
+  --muted: light-dark(#67645c, #a09d94);
+  --line: light-dark(#e5e2d9, #2e3238);
+  --accent: light-dark(#245b8f, #8cbcec);
+  --tag: light-dark(#f1efe8, #272b30);
+  --highlight: light-dark(#f6e9b8, #4a4120);
+  --shadow: 0 1px 2px light-dark(rgb(40 35 20 / 5%), transparent);
+  --serif: "Newsreader Variable", "Songti SC", Georgia, serif;
+  --sans: "Inter Variable", "PingFang SC", system-ui, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, monospace;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+.astro-code,
+.astro-code span {
+  color: light-dark(var(--shiki-light), var(--shiki-dark));
+  background-color: light-dark(var(--shiki-light-bg), var(--shiki-dark-bg));
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+a {
+  color: var(--accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+
+a:hover {
+  text-decoration-thickness: 2px;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--serif);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+.wrap {
+  width: min(100% - 2rem, 46rem);
+  margin-inline: auto;
+}
+
+.page-head {
+  margin-block: 3rem 2.5rem;
+}
+
+.page-head h1 {
+  margin: 0;
+  font-size: 2.5rem;
+}
+
+.page-head p {
+  max-width: 36rem;
+  margin: 0.6rem 0 0;
+  color: var(--muted);
+}
+
+.eyebrow {
+  margin: 0 0 0.9rem;
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 0.75rem;
+  box-shadow: var(--shadow);
+}
+
+.meta {
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tags li {
+  padding: 0.1rem 0.55rem;
+  border-radius: 99px;
+  background: var(--tag);
+  color: var(--muted);
+  font-size: 0.76rem;
+}
+
+.empty {
+  padding: 2rem;
+  color: var(--muted);
+  text-align: center;
+}
+
+.prose {
+  font-family: var(--serif);
+  font-size: 1.2rem;
+  line-height: 1.65;
+}
+
+.prose h2 {
+  margin: 2.2em 0 0.6em;
+  font-size: 1.6em;
+}
+
+.prose h3 {
+  margin: 1.8em 0 0.5em;
+  font-size: 1.25em;
+}
+
+.prose p,
+.prose ul,
+.prose ol,
+.prose blockquote,
+.prose table,
+.prose pre {
+  margin-block: 1.1em;
+}
+
+.prose blockquote {
+  margin-inline: 0;
+  padding-left: 1.1em;
+  border-left: 2px solid var(--line);
+  color: var(--muted);
+}
+
+.prose code {
+  font-family: var(--mono);
+  font-size: 0.8em;
+}
+
+.prose :not(pre) > code {
+  padding: 0.12em 0.35em;
+  border-radius: 0.3em;
+  background: var(--tag);
+}
+
+.prose pre {
+  overflow-x: auto;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--line);
+  border-radius: 0.6rem;
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.prose table {
+  display: block;
+  overflow-x: auto;
+  border-collapse: collapse;
+  font-family: var(--sans);
+  font-size: 0.9rem;
+}
+
+.prose th,
+.prose td {
+  padding: 0.45rem 1rem 0.45rem 0;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+}
+
+.prose h4 {
+  margin: 1.5em 0 0.4em;
+  font-family: var(--serif);
+  font-size: 1.05em;
+  font-weight: 600;
+}
+
+.prose :target {
+  scroll-margin-top: 1rem;
+}
+
+.prose img {
+  border-radius: 0.5rem;
+}
+
+.prose mark {
+  padding: 0 0.15em;
+  border-radius: 0.2em;
+  background: var(--highlight);
+  color: inherit;
+}
+
+.prose .callout {
+  margin-block: 1.2em;
+  padding: 0.1em 1.1em;
+  border-radius: 0.6rem;
+  background: var(--tag);
+}
+
+.prose details {
+  margin-block: 1.1em;
+  padding: 0.5em 1em;
+  border: 1px solid var(--line);
+  border-radius: 0.6rem;
+}
+
+.prose summary {
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.prose .columns {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  margin-block: 1.1em;
+}
+
+.prose .columns > div {
+  min-width: 0;
+}

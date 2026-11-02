@@ -1,0 +1,21 @@
+---
+import Base from "../layouts/Base.astro";
+import Lightbox from "../components/Lightbox.astro";
+import PhotoAlbum from "../components/PhotoAlbum.astro";
+import { getAlbums } from "../lib/content";
+
+const albums = await getAlbums();
+const tagline = "Meditation of time, memory, and the quiet persistence of beauty.";
+const unsplash = "https://unsplash.com/@michaelxi";
+---
+
+<Base title="Photos" description={tagline}>
+  <header class="page-head">
+    <h1>Photos</h1>
+    <p>{tagline} <a href={unsplash}>See all my photos on Unsplash</a>.</p>
+  </header>
+
+  {albums.length === 0 && <p class="card empty">No albums here yet. <a href={unsplash}>Browse my photos on Unsplash</a>.</p>}
+  {albums.map((album) => <PhotoAlbum album={album} />)}
+  {albums.length > 0 && <Lightbox />}
+</Base>

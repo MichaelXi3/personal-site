@@ -1,0 +1,75 @@
+---
+import Base from "../layouts/Base.astro";
+import ResumeBlocks from "../components/ResumeBlocks.astro";
+import { site } from "../site.config";
+
+const links = site.resumePdf ? [...site.links, { label: "Resume", href: site.resumePdf }] : site.links;
+---
+
+<Base>
+  <section class="intro">
+    <div>
+      <h1>{site.name}</h1>
+      <p class="role">{site.role}</p>
+      <p class="text">{site.intro}</p>
+      <p class="links">{links.map((link) => <a href={link.href}>{link.label}</a>)}</p>
+    </div>
+    <img src={site.avatar} alt="" width="104" height="104" />
+  </section>
+  <ResumeBlocks />
+</Base>
+
+<style>
+  .intro {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-top: 3.5rem;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: clamp(2.6rem, 8vw, 3.5rem);
+    line-height: 1.05;
+  }
+
+  .role {
+    margin: 0.5rem 0 0;
+    color: var(--muted);
+  }
+
+  .text {
+    max-width: 34rem;
+    margin: 1.1rem 0 0;
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    line-height: 1.45;
+  }
+
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1.1rem;
+    margin: 1.1rem 0 0;
+    font-size: 0.93rem;
+  }
+
+  img {
+    flex: none;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    background: var(--surface);
+  }
+
+  @media (max-width: 40rem) {
+    .intro {
+      margin-top: 2.25rem;
+    }
+
+    img {
+      width: 72px;
+      height: 72px;
+    }
+  }
+</style>

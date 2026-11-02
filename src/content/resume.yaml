@@ -1,0 +1,45 @@
+# Rendered as the resume blocks on the home page.
+experience:
+  - org: NetApp
+    role: Software Engineer, WAFL File System
+    period: Jun 2024 – Present
+    url: https://www.netapp.com
+    summary: File system performance and reliability for NetApp's ONTAP All-Flash platforms.
+    highlights:
+      - "Core engineer on NetApp Novus (AI-scale storage on ONTAP): prototyped and co-built write-path changes that decouple data flushing from checkpoints to remove write bottlenecks in highly concurrent AI workloads."
+      - Improved SAN write throughput and checkpoint flush latency on all-flash systems by dynamically scaling parallel flush threads.
+      - Built a kernel-level block allocation feature that speeds up test setup for disaggregated storage and substantially shortens targeted test runs.
+      - Root-caused and fixed critical production defects in the buffer cache and checkpoint code using GDB and core-dump analysis; backported fixes to customer releases.
+      - Extended a Python system-test framework to single-node and clustered configurations, improving test coverage and developer velocity.
+    tags: [C, C++, Python, File Systems, Performance]
+  - org: Wake Forest University
+    role: Research Assistant, System Security Research Lab
+    period: Sep 2022 – Oct 2023
+    repo: https://github.com/MichaelXi3/camflow-android-provenance
+    summary: Android kernel provenance data tracking, an Android kernel security mechanism.
+    highlights:
+      - Implemented a C-based native daemon to capture and stream kernel-level provenance events; designed a high-throughput parsing pipeline to export system activity into structured JSON format.
+      - Built a Python analytical suite using NetworkX to reconstruct and visualize system-call dependency graphs, enabling identification of security anomalies in kernel provenance data.
+    tags: [C, Python, Android, Linux Kernel, Security]
+  - org: AppDev at Wake
+    role: Co-founder
+    period: 2022 – 2024
+    summary: Co-founded a group that builds apps for the Wake Forest community.
+    highlights:
+      - Led WFU Eatery, a WeChat mini program with real-time traffic, food ratings, reviews, and upcoming menus for international students.
+      - Led WFU Covid, a dashboard that shows on-campus Covid data to parents of international students.
+    tags: [Mobile Apps, WeChat, iOS]
+
+education:
+  - org: Georgia Tech
+    degree: M.S. in Computer Science
+    period: Expected May 2027
+    note: "Coursework includes Advanced Operating Systems, Graduate Introduction to Operating Systems, and Computer Networks."
+  - org: Wake Forest University
+    degree: B.S. in Computer Science
+    period: May 2024
+
+focus:
+  - High Performance File Systems
+  - System Engineering
+  - C, C++, Python, Java, Shell

@@ -1,0 +1,159 @@
+---
+import { getEntry } from "astro:content";
+
+const entry = await getEntry("resume", "resume");
+if (!entry) throw new Error("src/content/resume.yaml is missing");
+const { experience, education, focus } = entry.data;
+---
+
+<section aria-labelledby="experience" class="group">
+  <h2 id="experience" class="eyebrow">Experience</h2>
+  <div class="stack">
+    {
+      experience.map((job) => (
+        <article class="card block">
+          <div class="row">
+            <h3>{job.url ? <a href={job.url}>{job.org}</a> : job.org}</h3>
+            <span class="meta">{job.period}</span>
+          </div>
+          <p class="role">{job.role}</p>
+          <p>{job.summary}</p>
+          {job.highlights.length > 0 && (
+            <ul class="highlights">
+              {job.highlights.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          )}
+          {job.repo && <p class="repo"><a href={job.repo}>Source on GitHub</a></p>}
+          {job.tags.length > 0 && (
+            <ul class="tags">
+              {job.tags.map((tag) => (
+                <li>{tag}</li>
+              ))}
+            </ul>
+          )}
+        </article>
+      ))
+    }
+  </div>
+</section>
+
+<div class="split">
+  <section aria-labelledby="education" class="group">
+    <h2 id="education" class="eyebrow">Education</h2>
+    <div class="stack">
+      {
+        education.map((school) => (
+          <article class="card block">
+            <h3>{school.org}</h3>
+            <p class="role">{school.degree}</p>
+            <p class="meta">{school.period}</p>
+            {school.note && <p class="note">{school.note}</p>}
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section aria-labelledby="focus" class="group">
+    <h2 id="focus" class="eyebrow">Focus</h2>
+    <ul class="card block focus">
+      {focus.map((item) => <li>{item}</li>)}
+    </ul>
+  </section>
+</div>
+
+<style>
+  .group {
+    margin-top: 2.5rem;
+  }
+
+  .stack {
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .block {
+    padding: 1.15rem 1.25rem;
+  }
+
+  .block p {
+    margin: 0.35rem 0 0;
+  }
+
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.1rem 1rem;
+  }
+
+  h3 {
+    margin: 0;
+    font-size: 1.3rem;
+  }
+
+  h3 a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  h3 a:hover {
+    color: var(--accent);
+  }
+
+  .block .role {
+    margin-top: 0.1rem;
+    color: var(--muted);
+    font-size: 0.93rem;
+  }
+
+  .highlights {
+    margin: 0.6rem 0 0.9rem;
+    padding-left: 1.1rem;
+    font-size: 0.95rem;
+  }
+
+  .highlights li + li {
+    margin-top: 0.25rem;
+  }
+
+  .block .repo {
+    margin-block: -0.4rem 0.9rem;
+    font-size: 0.9rem;
+  }
+
+  .note {
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+
+  .split {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    align-items: start;
+    gap: 0 1rem;
+  }
+
+  .focus {
+    margin: 0;
+    list-style: none;
+  }
+
+  .focus li {
+    padding-block: 0.45rem;
+    font-size: 0.95rem;
+  }
+
+  .focus li + li {
+    border-top: 1px solid var(--line);
+  }
+
+  @media (max-width: 40rem) {
+    .split {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
