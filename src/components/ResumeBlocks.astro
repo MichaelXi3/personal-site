@@ -48,7 +48,7 @@ const { experience, education, focus } = entry.data;
           <article class="card block">
             <h3>{school.org}</h3>
             <p class="role">{school.degree}</p>
-            <p class="meta">{school.period}</p>
+            {school.period && <p class="meta">{school.period}</p>}
             {school.note && <p class="note">{school.note}</p>}
           </article>
         ))

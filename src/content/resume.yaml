@@ -33,10 +33,9 @@ experience:
 education:
   - org: Georgia Tech
     degree: M.S. in Computer Science
-    period: Expected May 2027
-    note: "Coursework includes Advanced Operating Systems, Graduate Introduction to Operating Systems, and Computer Networks."
+    note: Specialization in Computer Systems
   - org: Wake Forest University
-    degree: B.S. in Computer Science
+    degree: B.S. in Computer Science, minor in Statistics
     period: May 2024
 
 focus:

@@ -21,7 +21,7 @@ const resume = defineCollection({
       z.object({
         org: z.string(),
         degree: z.string(),
-        period: z.string(),
+        period: z.string().optional(),
         note: z.string().optional(),
       }),
     ),
